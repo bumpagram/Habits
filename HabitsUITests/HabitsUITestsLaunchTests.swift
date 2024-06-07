@@ -1,9 +1,7 @@
-//
 //  HabitsUITestsLaunchTests.swift
 //  HabitsUITests
-//
-//  Created by Denis Azarkov on 7/6/24.
-//
+//  Created by bumpagram on 7/6/24.
+
 
 import XCTest
 
