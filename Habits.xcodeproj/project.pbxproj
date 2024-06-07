@@ -16,6 +16,7 @@
 		5AA1F8632C125CD1002CAABE /* HabitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1F8622C125CD1002CAABE /* HabitsTests.swift */; };
 		5AA1F86D2C125CD2002CAABE /* HabitsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1F86C2C125CD2002CAABE /* HabitsUITests.swift */; };
 		5AA1F86F2C125CD2002CAABE /* HabitsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1F86E2C125CD2002CAABE /* HabitsUITestsLaunchTests.swift */; };
+		5AAC0C332C131DA7003A111A /* HabitServer.app in Resources */ = {isa = PBXBuildFile; fileRef = 5AAC0C312C131DA7003A111A /* HabitServer.app */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		5AA1F8682C125CD2002CAABE /* HabitsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AA1F86C2C125CD2002CAABE /* HabitsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsUITests.swift; sourceTree = "<group>"; };
 		5AA1F86E2C125CD2002CAABE /* HabitsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5AAC0C312C131DA7003A111A /* HabitServer.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = HabitServer.app; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		5AA1F83F2C125CD0002CAABE = {
 			isa = PBXGroup;
 			children = (
+				5AAC0C322C131DA7003A111A /* resources */,
 				5AA1F84A2C125CD0002CAABE /* Habits */,
 				5AA1F8612C125CD1002CAABE /* HabitsTests */,
 				5AA1F86B2C125CD2002CAABE /* HabitsUITests */,
@@ -125,6 +128,14 @@
 				5AA1F86E2C125CD2002CAABE /* HabitsUITestsLaunchTests.swift */,
 			);
 			path = HabitsUITests;
+			sourceTree = "<group>";
+		};
+		5AAC0C322C131DA7003A111A /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				5AAC0C312C131DA7003A111A /* HabitServer.app */,
+			);
+			path = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AA1F8552C125CD1002CAABE /* Assets.xcassets in Resources */,
+				5AAC0C332C131DA7003A111A /* HabitServer.app in Resources */,
 				5AA1F8582C125CD1002CAABE /* Base in Resources */,
 				5AA1F8532C125CD0002CAABE /* Base in Resources */,
 			);
