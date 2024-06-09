@@ -37,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A1286BE2C1621FC00672F1D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5AA1F8482C125CD0002CAABE /* Habits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AA1F84B2C125CD0002CAABE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AA1F84D2C125CD0002CAABE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 		5AA1F83F2C125CD0002CAABE = {
 			isa = PBXGroup;
 			children = (
+				5A1286BE2C1621FC00672F1D /* README.md */,
 				5AAC0C322C131DA7003A111A /* resources */,
 				5AA1F84A2C125CD0002CAABE /* Habits */,
 				5AA1F8612C125CD1002CAABE /* HabitsTests */,
