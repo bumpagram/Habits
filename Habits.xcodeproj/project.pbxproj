@@ -13,6 +13,9 @@
 		5A052F7D2C164FB800B4A739 /* LogCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A052F7C2C164FB800B4A739 /* LogCollectionViewController.swift */; };
 		5A052F7F2C16589400B4A739 /* HabitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A052F7E2C16589400B4A739 /* HabitDetailViewController.swift */; };
 		5A052F812C1658B500B4A739 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A052F802C1658B500B4A739 /* UserDetailViewController.swift */; };
+		5A1FDFFE2C1723AF0078F9E6 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1FDFFD2C1723AF0078F9E6 /* Habit.swift */; };
+		5A1FE0002C172E020078F9E6 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1FDFFF2C172E020078F9E6 /* APIRequest.swift */; };
+		5A1FE0022C17445B0078F9E6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1FE0012C17445B0078F9E6 /* APIService.swift */; };
 		5AA1F84C2C125CD0002CAABE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1F84B2C125CD0002CAABE /* AppDelegate.swift */; };
 		5AA1F84E2C125CD0002CAABE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1F84D2C125CD0002CAABE /* SceneDelegate.swift */; };
 		5AA1F8532C125CD0002CAABE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5AA1F8522C125CD0002CAABE /* Base */; };
@@ -49,6 +52,9 @@
 		5A052F7E2C16589400B4A739 /* HabitDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailViewController.swift; sourceTree = "<group>"; };
 		5A052F802C1658B500B4A739 /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		5A1286BE2C1621FC00672F1D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5A1FDFFD2C1723AF0078F9E6 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		5A1FDFFF2C172E020078F9E6 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		5A1FE0012C17445B0078F9E6 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		5AA1F8482C125CD0002CAABE /* Habits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AA1F84B2C125CD0002CAABE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AA1F84D2C125CD0002CAABE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,11 +108,22 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		5A1FDFFC2C1723640078F9E6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5A1FDFFD2C1723AF0078F9E6 /* Habit.swift */,
+				5A1FDFFF2C172E020078F9E6 /* APIRequest.swift */,
+				5A1FE0012C17445B0078F9E6 /* APIService.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		5AA1F83F2C125CD0002CAABE = {
 			isa = PBXGroup;
 			children = (
 				5A1286BE2C1621FC00672F1D /* README.md */,
 				5AAC0C322C131DA7003A111A /* resources */,
+				5A1FDFFC2C1723640078F9E6 /* Model */,
 				5A052F772C164C7000B4A739 /* Controller */,
 				5AA1F84A2C125CD0002CAABE /* Habits */,
 				5AA1F8612C125CD1002CAABE /* HabitsTests */,
@@ -299,9 +316,12 @@
 				5A052F7B2C164F3000B4A739 /* UserCollectionViewController.swift in Sources */,
 				5A052F812C1658B500B4A739 /* UserDetailViewController.swift in Sources */,
 				5A052F792C164E6E00B4A739 /* HabitCollectionViewController.swift in Sources */,
+				5A1FE0022C17445B0078F9E6 /* APIService.swift in Sources */,
 				5AA1F84C2C125CD0002CAABE /* AppDelegate.swift in Sources */,
 				5AA1F84E2C125CD0002CAABE /* SceneDelegate.swift in Sources */,
+				5A1FDFFE2C1723AF0078F9E6 /* Habit.swift in Sources */,
 				5A052F7F2C16589400B4A739 /* HabitDetailViewController.swift in Sources */,
+				5A1FE0002C172E020078F9E6 /* APIRequest.swift in Sources */,
 				5A052F7D2C164FB800B4A739 /* LogCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
