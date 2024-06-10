@@ -30,3 +30,24 @@ struct Color: Codable {
         case brightness = "b"
     }
 }
+
+
+extension Habit: Hashable {
+    static func == (lhs: Habit, rhs: Habit) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)  // хз что это и зачем, просто переписал
+    }
+}
+
+extension Category: Hashable {
+    static func == (lhs: Category, rhs: Category) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)  // хз что это и зачем, просто переписал
+    }
+}
