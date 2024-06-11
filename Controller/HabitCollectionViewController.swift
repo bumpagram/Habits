@@ -16,15 +16,25 @@ class HabitCollectionViewController: UICollectionViewController {
     deinit {  habitsRequestTask?.cancel()  } // “You'll want to make sure the task is cancelled if the instance of the class is no longer in use but the task has not completed. You'll use the deinit method for this purpose. deinit is called just before the instance is deallocated. The superclass's deinit method will also be called automatically. ”
     
     enum ViewModel {
-        enum Section: Hashable {
+        enum Section: Hashable, Comparable {
             case favorites
             case category(_ category: Category)
+            
+            static func < (lhs: Section, rhs: Section) -> Bool {
+                switch (lhs, rhs) {
+                case (.category(let l), .category(let r)): return l.name < r.name
+                case (.favorites, _): return true
+                case (_, .favorites): return false
+                    // “This switch statement uses a new form of pattern matching over a tuple: a comma-separated list of values. In each case, you address permutations of your left-hand and right-hand values. If they're both categories, you sort by name. If one or the other is .favorites, you ensure that it's sorted to the beginning.
+                }
+            }
         }
         typealias Item = Habit
     }
 
     struct Model {
         var habitsByName = [String: Habit]()
+        var favoriteHabits: [Habit] {  return Settings.shared.favoriteHabits }
     }
     
     var datasource: DataSourceType!
@@ -51,7 +61,20 @@ class HabitCollectionViewController: UICollectionViewController {
     
     
     func updateCollectionView() {
-        // “to update the collection view once the API has returned data”
+        // “to update the collection view once the API has returned data”. this method will be responsible for building a view model, using it to create a snapshot, and applying that snapshot to the diffable data source.
+        let itemsBySection = model.habitsByName.values.reduce(into: [ViewModel.Section: [ViewModel.Item]]() ) { partialResult, habit in
+            let item = habit
+            let section: ViewModel.Section
+            if model.favoriteHabits.contains(habit) {
+                section = .favorites
+            } else {
+                section = .category(habit.category)
+            }
+            partialResult[section, default: []].append(item)  // хз что тут происходит - просто переписал
+        }
+        
+        let sectionIDs = itemsBySection.keys.sorted()
+        datasource.applySnapshotUsing(sectionIDs: sectionIDs, itemsBySection: itemsBySection)
         
     }
 
