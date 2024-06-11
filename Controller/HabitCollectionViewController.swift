@@ -13,7 +13,10 @@ class HabitCollectionViewController: UICollectionViewController {
     typealias DataSourceType = UICollectionViewDiffableDataSource<ViewModel.Section, ViewModel.Item>
     var habitsRequestTask: Task <Void, Never>? = nil  // keep track of async tasks so they can be cancelled when appropriate (колесо текущих активных). “This property is used to cancel the task if it has not completed before a new request is made.”
     
-    deinit {  habitsRequestTask?.cancel()  } // “You'll want to make sure the task is cancelled if the instance of the class is no longer in use but the task has not completed. You'll use the deinit method for this purpose. deinit is called just before the instance is deallocated. The superclass's deinit method will also be called automatically. ”
+    deinit {
+        habitsRequestTask?.cancel()
+        // “You'll want to make sure the task is cancelled if the instance of the class is no longer in use but the task has not completed. You'll use the deinit method for this purpose. deinit is called just before the instance is deallocated. The superclass's deinit method will also be called automatically. ”
+        }
     
     enum ViewModel {
         enum Section: Hashable, Comparable {
@@ -37,12 +40,34 @@ class HabitCollectionViewController: UICollectionViewController {
         var favoriteHabits: [Habit] {  return Settings.shared.favoriteHabits }
     }
     
+    enum SectionHeader: String {
+        case kind = "SectionHeader"
+        case reuse = "HeaderView"
+        var identifier: String { return rawValue }  // это доп unwrapper, чтобы case переводить в String в нужных функциях вызова
+    }
+    
     var datasource: DataSourceType!
-    var model = Model()  // “to store the data model after it's fetched from the network. Notice that you don't have a viewModel property. You'll construct a new view model each time you receive an update from the API and use it to create a snapshot, so there's no need for you to maintain your own copy.
+    var model = Model()  
+    /* “to store the data model after it's fetched from the network. Notice that you don't have a viewModel property. You'll construct a new view model each time you receive an update from the API and use it to create a snapshot, so there's no need for you to maintain your own copy.
+     */
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // code to set up sollcection view and fetch your data
+        datasource = createDataSource()
+        collectionView.dataSource = datasource
+        collectionView.collectionViewLayout = createLayout()
+        // register your new header class
+        collectionView.register(NamedSectionHeaderView.self, forSupplementaryViewOfKind: SectionHeader.kind.identifier, withReuseIdentifier: SectionHeader.reuse.identifier)
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // “that this screen refreshes every time you visit it. (This won't be necessary now, but in the future users will toggle the favorite status of habits on different screens.)
+       
+        update()
     }
     
     
@@ -62,7 +87,7 @@ class HabitCollectionViewController: UICollectionViewController {
     
     func updateCollectionView() {
         // “to update the collection view once the API has returned data”. this method will be responsible for building a view model, using it to create a snapshot, and applying that snapshot to the diffable data source.
-        let itemsBySection = model.habitsByName.values.reduce(into: [ViewModel.Section: [ViewModel.Item]]() ) { partialResult, habit in
+        var itemsBySection = model.habitsByName.values.reduce(into: [ViewModel.Section: [ViewModel.Item]]() ) { partialResult, habit in
             let item = habit
             let section: ViewModel.Section
             if model.favoriteHabits.contains(habit) {
@@ -73,12 +98,53 @@ class HabitCollectionViewController: UICollectionViewController {
             partialResult[section, default: []].append(item)  // хз что тут происходит - просто переписал
         }
         
+        itemsBySection = itemsBySection.mapValues({  $0.sorted()  })  // “handy method for dictionaries that applies the provided closure to each of the values in the dictionary. ”
+        
         let sectionIDs = itemsBySection.keys.sorted()
         datasource.applySnapshotUsing(sectionIDs: sectionIDs, itemsBySection: itemsBySection)
-        
     }
 
+        
+    func createDataSource() -> DataSourceType {
+        let somedataSource = DataSourceType(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Habit", for: indexPath) as! UICollectionViewListCell
+            var content = cell.defaultContentConfiguration()
+            content.text = itemIdentifier.name
+            cell.contentConfiguration = content
+            return cell
+        }
+        
+        somedataSource.supplementaryViewProvider = .some({ collectionView, elementKind, indexPath in
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: SectionHeader.kind.identifier, withReuseIdentifier: SectionHeader.reuse.identifier, for: indexPath) as! NamedSectionHeaderView
+            let section = somedataSource.snapshot().sectionIdentifiers[indexPath.section]
+            
+            switch section {
+            case .favorites: header.nameLabel.text = "Favorites"
+            case .category(let existCategory): header.nameLabel.text = existCategory.name
+            }
+            
+            return header
+        })
+        
+        
+        return somedataSource
+    }
     
     
+    func createLayout() -> UICollectionViewCompositionalLayout {
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+        
+        let groupsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupsize, repeatingSubitem: item, count: 1)
+        
+        let sectionheader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(36)), elementKind: SectionHeader.kind.identifier, alignment: .top)
+        sectionheader.pinToVisibleBounds = true
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
+        section.boundarySupplementaryItems = [sectionheader]
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }
     
 }
