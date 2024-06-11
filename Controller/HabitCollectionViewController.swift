@@ -71,6 +71,27 @@ class HabitCollectionViewController: UICollectionViewController {
     }
     
     
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        /* “To allow the user to easily toggle a habit's favorite status, you'll use a context menu that's activated with a long press. To provide a context menu from a collection view cell, declare the following delegate method.
+         “The menu system in iOS is built on the UIMenu type. A menu can contain menu items that trigger actions along with submenus to create arbitrary hierarchies. UICollectionViewController handles a default long press behavior on its cells and will automatically display a context menu if you provide an implementation for the delegate method above.”
+         */
+        
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            
+            let item = self.datasource.itemIdentifier(for: indexPath)!
+            let willBeTitle = self.model.favoriteHabits.contains(item) ? "Unfavorite" : "Favorite" // тернарный оператор Bool для вывода title будущей кнопки
+            let favToggle = UIAction(title: willBeTitle ) { UIAction in
+                Settings.shared.toggleFavorite(item)
+                self.updateCollectionView()
+            }
+            
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [favToggle])
+        }
+     
+        return config
+    }
+    
+    
     func update() { // to get Habit objects from server
         habitsRequestTask?.cancel()
         habitsRequestTask = Task {

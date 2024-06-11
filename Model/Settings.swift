@@ -39,7 +39,18 @@ struct Settings {
         }
     }
     
-    
+    mutating func toggleFavorite(_ this: Habit) {
+        
+        var favor = favoriteHabits
+        
+        if favor.contains(this) {
+            favor = favor.filter({  $0 != this  })
+        } else {
+            favor.append(this)
+        }
+        
+        favoriteHabits = favor // отправляем в проперти обновленный список избранных Habits
+    }
 }
 
 
