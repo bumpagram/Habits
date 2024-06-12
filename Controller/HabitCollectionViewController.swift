@@ -139,10 +139,16 @@ class HabitCollectionViewController: UICollectionViewController {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: SectionHeader.kind.identifier, withReuseIdentifier: SectionHeader.reuse.identifier, for: indexPath) as! NamedSectionHeaderView
             let section = somedataSource.snapshot().sectionIdentifiers[indexPath.section]
             
+            
             switch section {
-            case .favorites: header.nameLabel.text = "Favorites"
+            case .favorites: 
+                header.nameLabel.text = "Favorites"
+                //header.backgroundColor = .systemBlue // для избренного дополнительно стилизуем заголовок
+                //header.nameLabel.textColor = .white  // вне упражнения самодеятельность. почему-то багуется и красит при скролле случайные заголовки секций помимо избранного
+                
             case .category(let existCategory): header.nameLabel.text = existCategory.name
             }
+             
             
             return header
         })
@@ -165,7 +171,11 @@ class HabitCollectionViewController: UICollectionViewController {
         section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
         section.boundarySupplementaryItems = [sectionheader]
         
+        
         return UICollectionViewCompositionalLayout(section: section)
     }
+  
+    
+    
     
 }

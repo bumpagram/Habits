@@ -78,7 +78,7 @@
             </objects>
             <point key="canvasLocation" x="-952" y="632"/>
         </scene>
-        <!--Habit Collection View Controller-->
+        <!--Habits-->
         <scene sceneID="jEz-Jc-plQ">
             <objects>
                 <collectionViewController id="zk2-an-GX4" customClass="HabitCollectionViewController" customModule="Habits" customModuleProvider="target" sceneMemberID="viewController">
@@ -111,7 +111,7 @@
                             <outlet property="delegate" destination="zk2-an-GX4" id="4y4-31-3rj"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="oPZ-9N-Q0i"/>
+                    <navigationItem key="navigationItem" title="Habits" id="oPZ-9N-Q0i"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJh-L2-X6X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

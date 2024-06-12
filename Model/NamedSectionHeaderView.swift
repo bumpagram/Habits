@@ -30,12 +30,12 @@ class NamedSectionHeaderView: UICollectionReusableView {
     private func setupView() {
         backgroundColor = .systemGray5
         addSubview(nameLabel)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = true
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
-                           
+         
     }
 }
