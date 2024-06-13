@@ -21,6 +21,7 @@ struct Settings {
         defaults.set(somestring, forKey: key)
     }
     
+    
     private func unarchiveJSON<T: Decodable>(key: String) -> T? {
         guard let somestring = defaults.string(forKey: key),
               let data = somestring.data(using: .utf8) else {
@@ -30,6 +31,7 @@ struct Settings {
         return try! JSONDecoder().decode(T.self, from: data)
     }
    
+    
     var favoriteHabits: [Habit] {
         get {
             return unarchiveJSON(key: Setting.favoriteHabits) ?? []
@@ -39,6 +41,7 @@ struct Settings {
         }
     }
     
+    
     var followedUserIDs: [String] {
         get {
             return unarchiveJSON(key: Setting.followedUserIDs) ?? []
@@ -47,6 +50,7 @@ struct Settings {
             archiveJSON(value: newValue, key: Setting.followedUserIDs)
         }
     }
+    
     
     mutating func toggleFavorite(_ this: Habit) {
         
@@ -60,7 +64,23 @@ struct Settings {
         
         favoriteHabits = favor // отправляем в проперти обновленный список избранных Habits
     }
+    
+    
+    mutating func toggleFollow(_ this: User) {  // управляем подписками на пользователей
+        var willUpdate = followedUserIDs
+        
+        if willUpdate.contains(this.id) {
+            willUpdate = willUpdate.filter({   $0 != this.id   })  // возвращаем в самого себя отфильтрованный словарь, с элементами где нет совпадений по текущим followed users, т.е без них
+        } else {
+            willUpdate.append(this.id)  // если не содержит указанный аргумент, значит не followed. т.е добавить к отслеживаемым
+        }
+        followedUserIDs = willUpdate
+    }
+    
+    
 }
+
+
 
 
 enum Setting {

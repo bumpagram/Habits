@@ -56,6 +56,26 @@ class UserCollectionViewController: UICollectionViewController {
     }
     
     
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        // добавляет контекстное меню при зажатии ячейки, collectionView по умолчанию способен захватить такое действие. Но в отличие от habitCVC тут замыкание UIMenu в замыкании походу. чет я туплю, переписал с учебника короче
+        
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (elements)-> UIMenu? in
+            guard let item = self.datasource.itemIdentifier(for: indexPath) else  {return nil}
+            
+            let followToggle = UIAction(title: item.isFollowed ? "UnFollow" : "Follow") { UIAction in
+                Settings.shared.toggleFollow(item.user)
+                self.updateCollectionView()
+            }
+            
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [followToggle])  // child to add
+        }
+        
+        return config
+        /* “If you build and run your app now, everything should work correctly. You won’t see any indication that a user’s followed status has changed, but rest assured that the users you follow will appear after you’ve completed their section on the home screen. (One of the stretch goals at the end of this project is adding badges for followed users.)
+        */
+    }
+    
+    
     func update() {
         usersRequestTask?.cancel()
         usersRequestTask = Task {
