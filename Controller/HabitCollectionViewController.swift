@@ -11,6 +11,7 @@ private let reuseIdentifier = "Cell"
 class HabitCollectionViewController: UICollectionViewController {
     
     typealias DataSourceType = UICollectionViewDiffableDataSource<ViewModel.Section, ViewModel.Item>
+    
     var habitsRequestTask: Task <Void, Never>? = nil  // keep track of async tasks so they can be cancelled when appropriate (колесо текущих активных). “This property is used to cancel the task if it has not completed before a new request is made.”
     
     deinit {

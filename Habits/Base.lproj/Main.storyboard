@@ -166,7 +166,7 @@
             </objects>
             <point key="canvasLocation" x="1085" y="-125"/>
         </scene>
-        <!--User Collection View Controller-->
+        <!--People-->
         <scene sceneID="GlN-ZV-aho">
             <objects>
                 <collectionViewController id="MYO-SA-C33" customClass="UserCollectionViewController" customModule="Habits" customModuleProvider="target" sceneMemberID="viewController">
@@ -181,7 +181,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="D5h-cM-WLf">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="User" id="D5h-cM-WLf" customClass="UICollectionViewListCell">
                                 <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2JZ-tg-m6I">
@@ -198,7 +198,7 @@
                             <outlet property="delegate" destination="MYO-SA-C33" id="7wv-eP-eH4"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="gk9-WL-ZfW"/>
+                    <navigationItem key="navigationItem" title="People" id="gk9-WL-ZfW"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3CC-K3-qh9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

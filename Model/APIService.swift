@@ -12,3 +12,9 @@ struct HabitRequest: APIRequest {
 }
 
 
+
+
+struct UserRequest: APIRequest {
+    typealias Response = [String: User]
+    var path: String {"/users"}
+}
