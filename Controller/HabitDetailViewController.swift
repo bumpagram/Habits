@@ -7,14 +7,37 @@
 import UIKit
 
 class HabitDetailViewController: UIViewController {
-
+    
+    @IBOutlet var habitnameLabel: UILabel!
+    @IBOutlet var categoryLabel: UILabel!
+    @IBOutlet var infoLabel: UILabel!
+    @IBOutlet var collectionview: UICollectionView!
+    
+    var habit: Habit! // “a property for the habit this view controller will handle”
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        habitnameLabel.text = habit.name
+        categoryLabel.text = habit.category.name
+        infoLabel.text = habit.info
+        
     }
     
 
+    init?(coder: NSCoder, habit: Habit) {
+        self.habit = habit
+        super.init(coder: coder)
+    }
+    required init?(coder: NSCoder) { // требование компилятора, если пишешь кастомный failable init
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 

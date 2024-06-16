@@ -124,14 +124,80 @@
                     <view key="view" contentMode="scaleToFill" id="KBY-Wc-ksB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7Ht-GH-Dgf" userLabel="Vstack">
+                                <rect key="frame" x="16" y="123" width="361" height="77"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="firstBaseline" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="3lT-Qk-RVf" userLabel="HStack">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="40.666666666666664"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Habit Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ReT-gx-SdF">
+                                                <rect key="frame" x="0.0" y="0.0" width="172.33333333333334" height="40.666666666666664"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQD-X2-SNV">
+                                                <rect key="frame" x="298" y="18" width="63" height="18"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFd-OW-0Kw">
+                                        <rect key="frame" x="0.0" y="56.666666666666664" width="361" height="20.333333333333336"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="M8X-lP-8s5">
+                                <rect key="frame" x="0.0" y="220" width="393" height="549"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8zS-bX-c8P">
+                                    <size key="itemSize" width="393" height="44"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCount" id="m70-p1-icf" customClass="UICollectionViewListCell" customModule="Habits" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wi4-ES-lC5">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="393" height="44"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Aie-hw-cun"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="M8X-lP-8s5" firstAttribute="top" secondItem="7Ht-GH-Dgf" secondAttribute="bottom" constant="20" id="7YL-JE-S35"/>
+                            <constraint firstItem="Aie-hw-cun" firstAttribute="bottom" secondItem="M8X-lP-8s5" secondAttribute="bottom" id="LnH-iV-fDf"/>
+                            <constraint firstItem="Aie-hw-cun" firstAttribute="trailing" secondItem="7Ht-GH-Dgf" secondAttribute="trailing" constant="16" id="cLL-I1-bDD"/>
+                            <constraint firstItem="7Ht-GH-Dgf" firstAttribute="leading" secondItem="Aie-hw-cun" secondAttribute="leading" constant="16" id="exg-lD-iQU"/>
+                            <constraint firstItem="Aie-hw-cun" firstAttribute="trailing" secondItem="M8X-lP-8s5" secondAttribute="trailing" id="fbm-qq-pQa"/>
+                            <constraint firstItem="M8X-lP-8s5" firstAttribute="leading" secondItem="Aie-hw-cun" secondAttribute="leading" id="u27-1r-RQj"/>
+                            <constraint firstItem="7Ht-GH-Dgf" firstAttribute="top" secondItem="Aie-hw-cun" secondAttribute="top" constant="20" id="w8k-em-TZz"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="c07-HK-dkW"/>
+                    <connections>
+                        <outlet property="categoryLabel" destination="YQD-X2-SNV" id="RMX-Dg-Kjm"/>
+                        <outlet property="collectionview" destination="M8X-lP-8s5" id="KpF-Sr-bsG"/>
+                        <outlet property="habitnameLabel" destination="ReT-gx-SdF" id="lhp-bS-7SM"/>
+                        <outlet property="infoLabel" destination="MFd-OW-0Kw" id="AAA-L2-8L8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GeP-dK-lGQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="111" y="1354"/>
+            <point key="canvasLocation" x="110.68702290076335" y="1353.5211267605634"/>
         </scene>
         <!--User Detail View Controller-->
         <scene sceneID="qHl-iZ-hDJ">

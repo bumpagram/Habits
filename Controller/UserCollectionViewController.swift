@@ -62,7 +62,7 @@ class UserCollectionViewController: UICollectionViewController {
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (elements)-> UIMenu? in
             guard let item = self.datasource.itemIdentifier(for: indexPath) else  {return nil}
             
-            let followToggle = UIAction(title: item.isFollowed ? "UnFollow" : "Follow") { UIAction in
+            let followToggle = UIAction(title: item.isFollowed ? "Unfollow" : "Follow") { UIAction in
                 Settings.shared.toggleFollow(item.user)
                 self.updateCollectionView()
             }
