@@ -177,6 +177,16 @@ class HabitCollectionViewController: UICollectionViewController {
     }
   
     
+    @IBSegueAction func showHabitDetail(_ coder: NSCoder, sender: Any?) -> HabitDetailViewController? {
+        
+        guard let userTapThisCell = sender as? UICollectionViewCell,
+              let gotIndexPath = collectionView.indexPath(for: userTapThisCell),
+              let searchForItem = datasource.itemIdentifier(for: gotIndexPath) else {
+            return nil
+        }
+        
+        return HabitDetailViewController(coder: coder, habit: searchForItem)
+    }
     
     
 }

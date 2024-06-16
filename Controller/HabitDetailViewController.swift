@@ -47,6 +47,8 @@ class HabitDetailViewController: UIViewController {
     var habit: Habit! // “a property for the habit this view controller will handle”
 
     var currentWorkingTask: Task<Void, Never>? = nil  // контроллируем один текущий запрос, поэтому Task, а не TaskGroup
+    var updateInfoTimer: Timer? // раз в некоторое время опрашиваем сервер, чтобы обновлять UI
+    
     
     
     override func viewDidLoad() {
@@ -61,6 +63,7 @@ class HabitDetailViewController: UIViewController {
         collectionview.collectionViewLayout = createLayout()
         updateData()
     }
+    
     
     
     init?(coder: NSCoder, habit: Habit) {
@@ -147,14 +150,25 @@ class HabitDetailViewController: UIViewController {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateData()
+        updateInfoTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+            // сам таймер нас не интересует, надо просто интерфейс обновлять
+            self.updateData()
+        })
     }
-    */
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // нет смысла продолжать обновлять экран и стучаться через таймер в сервер, если с экрана ушел пользователь
+        updateInfoTimer?.invalidate()  //останавливает Timer и запрашивает его вывод из RunLoop
+        updateInfoTimer = nil
+    }
+    
+    
 
 }

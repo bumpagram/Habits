@@ -102,7 +102,7 @@
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="393" height="50"/>
                                 <connections>
-                                    <segue destination="MA2-yJ-axD" kind="show" id="fxc-4i-NGV"/>
+                                    <segue destination="MA2-yJ-axD" kind="show" destinationCreationSelector="showHabitDetail:sender:" id="fxc-4i-NGV"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
