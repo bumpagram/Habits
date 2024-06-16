@@ -30,6 +30,7 @@
 		5AA1F86F2C125CD2002CAABE /* HabitsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1F86E2C125CD2002CAABE /* HabitsUITestsLaunchTests.swift */; };
 		5AAC0C332C131DA7003A111A /* HabitServer.app in Resources */ = {isa = PBXBuildFile; fileRef = 5AAC0C312C131DA7003A111A /* HabitServer.app */; };
 		5AB9438A2C1F2C4B0016568C /* HabitStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB943892C1F2C4B0016568C /* HabitStatistics.swift */; };
+		5AE174962C1F84390041A562 /* UserStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE174952C1F84390041A562 /* UserStatistics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		5AA1F86E2C125CD2002CAABE /* HabitsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5AAC0C312C131DA7003A111A /* HabitServer.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = HabitServer.app; sourceTree = "<group>"; };
 		5AB943892C1F2C4B0016568C /* HabitStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatistics.swift; sourceTree = "<group>"; };
+		5AE174952C1F84390041A562 /* UserStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatistics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				5A93E1C82C18D02E002C7C1F /* NamedSectionHeaderView.swift */,
 				5A93E1CA2C19F22B002C7C1F /* User.swift */,
 				5AB943892C1F2C4B0016568C /* HabitStatistics.swift */,
+				5AE174952C1F84390041A562 /* UserStatistics.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				5A93E1C72C18B43B002C7C1F /* UICollectionViewDiffableDataSource+ViewModel.swift in Sources */,
 				5AA1F84C2C125CD0002CAABE /* AppDelegate.swift in Sources */,
 				5A93E1CB2C19F22B002C7C1F /* User.swift in Sources */,
+				5AE174962C1F84390041A562 /* UserStatistics.swift in Sources */,
 				5A52E8E92C1867F4004E2CAA /* Settings.swift in Sources */,
 				5AA1F84E2C125CD0002CAABE /* SceneDelegate.swift in Sources */,
 				5A1FDFFE2C1723AF0078F9E6 /* Habit.swift in Sources */,

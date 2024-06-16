@@ -11,6 +11,8 @@ struct HabitStatistics: Codable {
 
 
 
+
+
 struct UserCount: Codable, Hashable {  // for embedded type.
     //Hashable- because you'll need to guarantee stable identity of your view model items
     let user: User
