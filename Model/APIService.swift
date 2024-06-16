@@ -13,8 +13,26 @@ struct HabitRequest: APIRequest {
 
 
 
-
 struct UserRequest: APIRequest {
     typealias Response = [String: User]
     var path: String {"/users"}
+}
+
+
+
+struct HabitStatisticsRequest: APIRequest {
+    // for fetching habit statistics. Because you can ask for statistics for multiple habit names in one request, you'll provide a comma-separated list of IDs from the queryItems property.
+    
+    typealias Response = [HabitStatistics]
+    var path: String {"/habitStats"}  // API endpoint
+    var habitNames: [String]?
+    
+    var queryItems: [URLQueryItem]? {
+        if let existedhabitNames = habitNames {
+            return [URLQueryItem(name: "names", value: existedhabitNames.joined(separator: ","))]
+        } else {
+            return nil
+        }
+    }
+    
 }
