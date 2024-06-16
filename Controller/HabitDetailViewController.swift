@@ -111,7 +111,7 @@ class HabitDetailViewController: UIViewController {
         // “to configure your cells with user count information.”
         
        let somedata = DataSourceType(collectionView: collectionview) { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCount", for: indexPath) as! UICollectionViewListCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCount", for: indexPath) //as! UICollectionViewListCell
             var content = UIListContentConfiguration.subtitleCell()
             content.prefersSideBySideTextAndSecondaryText = true
             

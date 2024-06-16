@@ -23,6 +23,7 @@ extension UICollectionViewDiffableDataSource {
                     || sectionsRetainedIfEmpty.contains(someID) else { continue }
             snapshot.appendSections([someID])
             snapshot.appendItems(sectionItems, toSection: someID)
+            snapshot.reloadItems(sectionItems)  // to force all DiffDatsoure items to reload just after you've appended them to the snapshot. This is fix for  HabitStatistics - func hash, правильное отображение цифр
         }
         
         self.apply(snapshot, animatingDifferences: animatingDiff)

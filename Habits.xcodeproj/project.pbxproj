@@ -60,6 +60,7 @@
 		5A1FDFFD2C1723AF0078F9E6 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		5A1FDFFF2C172E020078F9E6 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		5A1FE0012C17445B0078F9E6 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		5A4E04DF2C1F70E90024DCF5 /* багТрекер.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "багТрекер.md"; sourceTree = "<group>"; };
 		5A52E8E82C1867F4004E2CAA /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		5A93E1C62C18B43B002C7C1F /* UICollectionViewDiffableDataSource+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewDiffableDataSource+ViewModel.swift"; sourceTree = "<group>"; };
 		5A93E1C82C18D02E002C7C1F /* NamedSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 		5AA1F83F2C125CD0002CAABE = {
 			isa = PBXGroup;
 			children = (
+				5A4E04DF2C1F70E90024DCF5 /* багТрекер.md */,
 				5A1286BE2C1621FC00672F1D /* README.md */,
 				5AAC0C322C131DA7003A111A /* resources */,
 				5A1FDFFC2C1723640078F9E6 /* Model */,
