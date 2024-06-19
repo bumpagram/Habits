@@ -88,3 +88,15 @@ extension APIRequest where Response == UIImage {
         return image
     }
 }
+
+
+// для POST запроса, где нет Response, а есть Void. будем использовать при отправке на сервер LoggedHabits.
+extension APIRequest {
+    func send() async throws -> Void {
+        let (_ , response) = try await URLSession.shared.data(for: request)  // проперти протокола
+        
+        guard let httpresponse = response as? HTTPURLResponse, httpresponse.statusCode == 200 else {
+            throw APIRequestError.requestFailed
+        }
+    }
+}

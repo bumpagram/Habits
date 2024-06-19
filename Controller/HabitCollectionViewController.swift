@@ -1,8 +1,6 @@
-//
 //  HabitCollectionViewController.swift
 //  Habits
 //  Created by bumpagram on 9/6/24.
-//
 
 import UIKit
 

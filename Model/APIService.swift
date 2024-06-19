@@ -69,3 +69,18 @@ struct ImageRequest: APIRequest {
     var imageID: String
     var path: String { "/images/" + imageID}
 }
+
+
+
+struct LogHabitRequest: APIRequest { // это будет не GET запрос, а POST
+    typealias Response = Void  // “because the API doesn't return anything from this POST call, you can declare Void as the response type”
+    
+    var loggedhabit: LoggedHabit
+    var path: String { "/loggedHabit" }
+    
+    var postData: Data? {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        return try! encoder.encode(loggedhabit)
+    }
+}

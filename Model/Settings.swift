@@ -7,6 +7,8 @@ import Foundation
 
 struct Settings {
     
+    let currentUser = User(id: "activeUser", name: "Test_username", color: nil, bio: nil)
+    
     static var shared = Settings() // синглтон. точка входа
     
     private let defaults = UserDefaults.standard  // “You're only running a simulated social network, so there'll only be one real user—the other users don't need to flag favorite habits or follow users. So you'll store favorite and followed status locally using UserDefaults.

@@ -82,4 +82,15 @@ Open the Terminal app, then type the following command to see the users:
 curl localhost:8080/users
 
 
+-----------------------------------------------------------
+
+Set Up the Server
+Because the server doesn't handle user accounts or logins, you'll have to do a little manual configuration so that the server and the app agree on the current user of the app. Click the Edit Active User button in the HabitTracker Server window. In the file that opens, edit the JSON to configure your name. You can add the optional color and bio properties or leave them out. You can keep the provided user ID, "activeUser", or use your own—as long as you don't choose one that collides with an existing user. (The default installed user IDs range from "user0" through "user40".)
+
+In the Settings file, add a new property for the current user that matches the values in the server's JSON.
+ 
+let currentUser = User(id: <User ID>, name: <User Name>, color: <User
+   Color or nil>, bio: <User Bio or nil>)
+   
+------------------------------------------------
 

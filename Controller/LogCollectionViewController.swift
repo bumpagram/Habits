@@ -1,87 +1,77 @@
-//
 //  LogCollectionViewController.swift
 //  Habits
 //  Created by bumpagram on 10/6/24.
-//
 
 import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class LogCollectionViewController: UICollectionViewController {
+class LogCollectionViewController: HabitCollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        // createLayout вызывается в ViewDidLoad, но в HabitCollectionViewController, тк унаследовались от него
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
-        // Configure the cell
     
-        return cell
+    override func createLayout() -> UICollectionViewCompositionalLayout {
+        /*
+         “The key difference between this screen and the existing habit collection screen is its layout. To make recording favorite habits the smoothest possible process, you'll lay out those cells in a grid rather than in a list, making them larger touch targets. And you won't need a header for the top section, since it'll be clear that the top items are the favorites.
+         */
+        let layout: UICollectionViewCompositionalLayout = .init { sectionindex, environment in
+            
+            if sectionindex == 0 && self.model.favoriteHabits.count > 0 {
+                // если в избранном что-то есть, тогда вывести это сеткой-квадратами по 2шт вверху экрана. это типо первая(нулевая) секция
+                let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.45), heightDimension: .fractionalHeight(1)))
+                item.contentInsets = .init(top: 12, leading: 12, bottom: 12, trailing: 12)
+                
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)), repeatingSubitem: item, count: 2)
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = .init(top: 20, leading: 0, bottom: 20, trailing: 0)
+                
+                return section
+                
+            } else {
+                // если в избранном ничего нет, то верстаем как обычно. сюда зайдем на всех секциях кроме нулевой.  верстаем группы высотой по 50 и на всю ширину.
+                let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+                
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), repeatingSubitem: item, count: 2)
+                group.interItemSpacing = .fixed(8)
+                group.contentInsets =  NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+                
+                let sectionheader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(36)), elementKind: SectionHeader.kind.identifier, alignment: .top)
+                sectionheader.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(40))
+                sectionheader.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
+                section.boundarySupplementaryItems = [sectionheader]
+                section.interGroupSpacing = 10
+                
+                return section
+            }
+            
+            
+        }
+        return layout
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // to send API request, when user taps the cell
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        guard let someItem = datasource.itemIdentifier(for: indexPath) else {return}
+        
+        let someLog = LoggedHabit(userID: Settings.shared.currentUser.id, habitName: someItem.name, timestamp: Date())  // дата - init прямо сейчас когда нажали
+        
+        Task {
+            try? await LogHabitRequest(loggedhabit: someLog).send()
+        }
+        /*
+         “Notice that a reference to the task is not saved in this case, as there is no reason to try to cancel it. All requests to send the data to the server should continue to be tried until it succeeds or times out. (Of course, in a real-world example you would want to handle errors, so the user has the opportunity to submit their request again.) A new Task will be created each time a habit is logged.
+         */
     }
-    */
 
 }
