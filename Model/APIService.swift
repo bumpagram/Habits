@@ -36,3 +36,31 @@ struct HabitStatisticsRequest: APIRequest {
     }
     
 }
+
+
+
+struct UserStatisticsRequest: APIRequest {
+    typealias Response = [UserStatistics]
+    var userIDs: [String]?
+    var path: String {"/userStats"}
+    
+    var queryItems: [URLQueryItem]? {
+        if let userIDs = userIDs {
+            return [URLQueryItem(name: "ids", value: userIDs.joined(separator: ","))]
+        } else {
+            return nil
+        }
+    }
+    // as you may have guessed, based on the model, you'll query the API for all the user's habit counts as well as those the user leads”
+}
+
+
+
+struct HabitLeadStatRequest: APIRequest {
+    typealias Response = UserStatistics
+    var userID: String
+    var path: String { "/userLeadingStats/\(userID)" }
+    
+}
+
+

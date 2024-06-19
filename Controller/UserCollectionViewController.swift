@@ -132,4 +132,18 @@ class UserCollectionViewController: UICollectionViewController {
     }
     
     
+    @IBSegueAction func showUserDetail(_ coder: NSCoder, sender: Any?) -> UserDetailViewController? {
+        // по нажатию на ячейку из экрана UserCollectionViewController найдем нужный экземпляр User и с ним инициализируем экран UserDetail, затем переходим на него.
+        
+        guard let userTapThisCell = sender as? UICollectionViewCell,
+              let gotIndexpath = collectionView.indexPath(for: userTapThisCell),
+              let findViewModelItem = datasource.itemIdentifier(for: gotIndexpath) else {
+            print("cant cross guard state in @IBSegueAction showUserDetail")
+            return nil
+        }
+        
+        return UserDetailViewController(coder: coder, user: findViewModelItem.user)
+    }
+    
+    
 }

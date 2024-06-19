@@ -13,11 +13,10 @@ struct UserStatistics: Codable {
 
 
 
-struct HabitCount: Codable, Hashable { // for embedded type
-    
+struct HabitCount: Codable, Hashable, Comparable {
+    // for embedded type
     let habit: Habit  // to display
     let count: Int
-    
     
     func hash(into hasher: inout Hasher) {
             hasher.combine(habit)
@@ -25,5 +24,7 @@ struct HabitCount: Codable, Hashable { // for embedded type
     static func ==(_ lhs: HabitCount, _ rhs: HabitCount) -> Bool {
             return lhs.habit == rhs.habit
         }
-    
+    static func < (lhs: HabitCount, rhs: HabitCount) -> Bool {
+        return lhs.habit < rhs.habit
+    }
 }
