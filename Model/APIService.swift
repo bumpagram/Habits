@@ -2,7 +2,7 @@
 //  Habits
 //  Created by bumpagram on 10/6/24.
 
-import Foundation
+import UIKit
 
 
 struct HabitRequest: APIRequest {
@@ -60,7 +60,12 @@ struct HabitLeadStatRequest: APIRequest {
     typealias Response = UserStatistics
     var userID: String
     var path: String { "/userLeadingStats/\(userID)" }
-    
 }
 
 
+
+struct ImageRequest: APIRequest {
+    typealias Response = UIImage
+    var imageID: String
+    var path: String { "/images/" + imageID}
+}

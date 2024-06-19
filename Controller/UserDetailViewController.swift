@@ -4,7 +4,7 @@
 
 import UIKit
 
-class UserDetailViewController: UIViewController {
+class UserDetailViewController: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var usernameLabel: UILabel!
@@ -65,6 +65,16 @@ class UserDetailViewController: UIViewController {
         collectionview.dataSource = datasource // назначили его из проперти в аутлет-> верстка
         collectionview.collectionViewLayout = createLayout()
         updateData()
+        
+        imageRequestTask = Task {
+            // “it's enough to send image request once, since you can assume user profile images will change rarely.”
+            if let fetchedImage = try? await ImageRequest(imageID: user.id).send() {
+                self.profileImageView.image = fetchedImage
+            }
+            imageRequestTask = nil
+        }
+        
+        collectionview.delegate = self
     }
     
     
@@ -188,8 +198,8 @@ class UserDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateData() // обновить данные экрана перед показом в первый раз
-        updateTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-            self.updateData()  // вызываем функцию на обновление данных с сервака каждый TimeInterval (1 сек)
+        updateTimer = .scheduledTimer(withTimeInterval: 3, repeats: true, block: { _ in
+            self.updateData()  // вызываем функцию на обновление данных с сервака каждый TimeInterval (3 сек)
         })
     }
     
@@ -200,5 +210,10 @@ class UserDetailViewController: UIViewController {
         updateTimer = nil
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // метод делегейта из протокола UICollectionViewDelegate, чтобы сбрасывать выделение ячейки при нажатии пользователя
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
     
 }

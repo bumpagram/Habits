@@ -11,8 +11,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // “you'll increase the cache size so that repeated image requests don't require sending data over the network each time”   УВЕЛИЧИМ КЭШ ДЛЯ КАРТИНОК до выполнения запроса в сеть
+        let tempDir = NSTemporaryDirectory() // returns path for temp directory for current user
+        let urlCache = URLCache(memoryCapacity: 25_000_000, diskCapacity: 50_000_000, diskPath: tempDir)
+        URLCache.shared = urlCache
+        
         return true
     }
+    
+    
 
     // MARK: UISceneSession Lifecycle
 
