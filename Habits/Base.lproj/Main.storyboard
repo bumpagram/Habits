@@ -58,13 +58,86 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="WBI-cM-NFL">
-                                <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LeaderboardHabit" id="WBI-cM-NFL" customClass="LeaderboardHabitCollectionViewCell" customModule="Habits" customModuleProvider="target">
+                                <rect key="frame" x="53.666666666666664" y="0.0" width="286" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mct-Tw-S0G">
-                                    <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="286" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HabitName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Suw-8p-DeX">
+                                            <rect key="frame" x="8" y="8" width="270" height="27"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leader" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cT-ga-HbN">
+                                            <rect key="frame" x="8" y="76" width="270" height="18"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secondary" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bue-KJ-4TQ">
+                                            <rect key="frame" x="8" y="102" width="270" height="18"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Suw-8p-DeX" firstAttribute="top" secondItem="Mct-Tw-S0G" secondAttribute="top" constant="8" id="9Mq-QP-dwf"/>
+                                        <constraint firstAttribute="trailing" secondItem="bue-KJ-4TQ" secondAttribute="trailing" constant="8" id="NsB-Le-tdr"/>
+                                        <constraint firstItem="Suw-8p-DeX" firstAttribute="leading" secondItem="Mct-Tw-S0G" secondAttribute="leading" constant="8" id="OPX-5O-9Nw"/>
+                                        <constraint firstItem="bue-KJ-4TQ" firstAttribute="leading" secondItem="Mct-Tw-S0G" secondAttribute="leading" constant="8" id="WPr-93-YAF"/>
+                                        <constraint firstAttribute="bottom" secondItem="bue-KJ-4TQ" secondAttribute="bottom" constant="8" id="cVe-FD-PVK"/>
+                                        <constraint firstItem="bue-KJ-4TQ" firstAttribute="top" secondItem="9cT-ga-HbN" secondAttribute="bottom" constant="8" id="eKy-3K-mYS"/>
+                                        <constraint firstAttribute="trailing" secondItem="9cT-ga-HbN" secondAttribute="trailing" constant="8" id="eMn-04-32Q"/>
+                                        <constraint firstItem="9cT-ga-HbN" firstAttribute="leading" secondItem="Mct-Tw-S0G" secondAttribute="leading" constant="8" id="ryk-0E-3ui"/>
+                                        <constraint firstAttribute="trailing" secondItem="Suw-8p-DeX" secondAttribute="trailing" constant="8" id="xcd-3x-gdU"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="286" height="128"/>
+                                <connections>
+                                    <outlet property="habitNameLabel" destination="Suw-8p-DeX" id="YUG-p8-6cA"/>
+                                    <outlet property="leaderLabel" destination="9cT-ga-HbN" id="e65-0w-mZK"/>
+                                    <outlet property="secondaryLabel" destination="bue-KJ-4TQ" id="xFB-8r-Z2d"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="FollowedUser" id="bhM-Al-gng" customClass="FollowedUserCollectionViewCell" customModule="Habits" customModuleProvider="target">
+                                <rect key="frame" x="1" y="138" width="391" height="128"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="HGB-NT-N6r">
+                                    <rect key="frame" x="0.0" y="0.0" width="391" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XpS-We-Ezo">
+                                            <rect key="frame" x="8" y="8" width="375" height="21"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmJ-y9-Sae">
+                                            <rect key="frame" x="24" y="45" width="359" height="75"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="XpS-We-Ezo" secondAttribute="trailing" constant="8" id="FRr-Y0-6H9"/>
+                                        <constraint firstItem="XpS-We-Ezo" firstAttribute="top" secondItem="HGB-NT-N6r" secondAttribute="top" constant="8" id="NIB-n0-yaf"/>
+                                        <constraint firstItem="XpS-We-Ezo" firstAttribute="leading" secondItem="HGB-NT-N6r" secondAttribute="leading" constant="8" id="P6n-SG-Iod"/>
+                                        <constraint firstItem="SmJ-y9-Sae" firstAttribute="leading" secondItem="HGB-NT-N6r" secondAttribute="leading" constant="24" id="ROc-Oi-0Ul"/>
+                                        <constraint firstItem="SmJ-y9-Sae" firstAttribute="top" secondItem="XpS-We-Ezo" secondAttribute="bottom" constant="16" id="b6g-2H-Ob9"/>
+                                        <constraint firstAttribute="bottom" secondItem="SmJ-y9-Sae" secondAttribute="bottom" constant="8" id="fGW-JE-njg"/>
+                                        <constraint firstAttribute="trailing" secondItem="SmJ-y9-Sae" secondAttribute="trailing" constant="8" id="yRg-c0-f2l"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="391" height="128"/>
+                                <connections>
+                                    <outlet property="primaryTextLabel" destination="XpS-We-Ezo" id="Vra-M8-OAW"/>
+                                    <outlet property="secondaryTextLabel" destination="SmJ-y9-Sae" id="mgU-mH-WZi"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -76,7 +149,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Guh-HC-WTy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-952" y="632"/>
+            <point key="canvasLocation" x="-953.43511450381675" y="631.69014084507046"/>
         </scene>
         <!--Habits-->
         <scene sceneID="jEz-Jc-plQ">

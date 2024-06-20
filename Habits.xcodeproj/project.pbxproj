@@ -21,6 +21,9 @@
 		5A93E1C92C18D02E002C7C1F /* NamedSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A93E1C82C18D02E002C7C1F /* NamedSectionHeaderView.swift */; };
 		5A93E1CB2C19F22B002C7C1F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A93E1CA2C19F22B002C7C1F /* User.swift */; };
 		5AA133272C2355E000FE4A7C /* LoggedHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA133262C2355E000FE4A7C /* LoggedHabit.swift */; };
+		5AA133292C245ABE00FE4A7C /* LeaderboardHabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA133282C245ABE00FE4A7C /* LeaderboardHabitCollectionViewCell.swift */; };
+		5AA1332C2C2460D200FE4A7C /* FollowedUserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1332B2C2460D200FE4A7C /* FollowedUserCollectionViewCell.swift */; };
+		5AA1332E2C24720200FE4A7C /* CombinedStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1332D2C24720200FE4A7C /* CombinedStatistics.swift */; };
 		5AA1F84C2C125CD0002CAABE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1F84B2C125CD0002CAABE /* AppDelegate.swift */; };
 		5AA1F84E2C125CD0002CAABE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1F84D2C125CD0002CAABE /* SceneDelegate.swift */; };
 		5AA1F8532C125CD0002CAABE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5AA1F8522C125CD0002CAABE /* Base */; };
@@ -68,6 +71,9 @@
 		5A93E1C82C18D02E002C7C1F /* NamedSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedSectionHeaderView.swift; sourceTree = "<group>"; };
 		5A93E1CA2C19F22B002C7C1F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5AA133262C2355E000FE4A7C /* LoggedHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedHabit.swift; sourceTree = "<group>"; };
+		5AA133282C245ABE00FE4A7C /* LeaderboardHabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardHabitCollectionViewCell.swift; sourceTree = "<group>"; };
+		5AA1332B2C2460D200FE4A7C /* FollowedUserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedUserCollectionViewCell.swift; sourceTree = "<group>"; };
+		5AA1332D2C24720200FE4A7C /* CombinedStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedStatistics.swift; sourceTree = "<group>"; };
 		5AA1F8482C125CD0002CAABE /* Habits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AA1F84B2C125CD0002CAABE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AA1F84D2C125CD0002CAABE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,8 +142,18 @@
 				5AB943892C1F2C4B0016568C /* HabitStatistics.swift */,
 				5AE174952C1F84390041A562 /* UserStatistics.swift */,
 				5AA133262C2355E000FE4A7C /* LoggedHabit.swift */,
+				5AA1332D2C24720200FE4A7C /* CombinedStatistics.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		5AA1332A2C24608B00FE4A7C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5AA133282C245ABE00FE4A7C /* LeaderboardHabitCollectionViewCell.swift */,
+				5AA1332B2C2460D200FE4A7C /* FollowedUserCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		5AA1F83F2C125CD0002CAABE = {
@@ -148,6 +164,7 @@
 				5AAC0C322C131DA7003A111A /* resources */,
 				5A1FDFFC2C1723640078F9E6 /* Model */,
 				5A052F772C164C7000B4A739 /* Controller */,
+				5AA1332A2C24608B00FE4A7C /* Cells */,
 				5AA1F84A2C125CD0002CAABE /* Habits */,
 				5AA1F8612C125CD1002CAABE /* HabitsTests */,
 				5AA1F86B2C125CD2002CAABE /* HabitsUITests */,
@@ -336,6 +353,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A052F762C164C2300B4A739 /* HomeCollectionViewController.swift in Sources */,
+				5AA133292C245ABE00FE4A7C /* LeaderboardHabitCollectionViewCell.swift in Sources */,
+				5AA1332E2C24720200FE4A7C /* CombinedStatistics.swift in Sources */,
 				5A93E1C92C18D02E002C7C1F /* NamedSectionHeaderView.swift in Sources */,
 				5A052F7B2C164F3000B4A739 /* UserCollectionViewController.swift in Sources */,
 				5AB9438A2C1F2C4B0016568C /* HabitStatistics.swift in Sources */,
@@ -343,6 +362,7 @@
 				5A052F792C164E6E00B4A739 /* HabitCollectionViewController.swift in Sources */,
 				5A1FE0022C17445B0078F9E6 /* APIService.swift in Sources */,
 				5A93E1C72C18B43B002C7C1F /* UICollectionViewDiffableDataSource+ViewModel.swift in Sources */,
+				5AA1332C2C2460D200FE4A7C /* FollowedUserCollectionViewCell.swift in Sources */,
 				5AA1F84C2C125CD0002CAABE /* AppDelegate.swift in Sources */,
 				5A93E1CB2C19F22B002C7C1F /* User.swift in Sources */,
 				5AA133272C2355E000FE4A7C /* LoggedHabit.swift in Sources */,
