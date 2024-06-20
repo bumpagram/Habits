@@ -74,7 +74,7 @@ class HomeCollectionViewController: UICollectionViewController {
     var datasource: DataSourceType!
     var updateTimer: Timer?
     
-    var userRequestTask: Task<Void, Never>? = nil //
+    var userRequestTask: Task<Void, Never>? = nil
     var habitRequestTask: Task<Void, Never>? = nil
     var combinedStatRequestTask: Task<Void, Never>? = nil
     
@@ -88,6 +88,9 @@ class HomeCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        datasource = createDataSource()
+        collectionView.dataSource = datasource
+        collectionView.collectionViewLayout = createLayout()
         
         userRequestTask = Task {
             if let fetchedUsers = try? await UserRequest().send() {
@@ -104,6 +107,7 @@ class HomeCollectionViewController: UICollectionViewController {
             self.updateCollectionview()
             habitRequestTask = nil
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -217,6 +221,33 @@ class HomeCollectionViewController: UICollectionViewController {
         
         
         return somedatasource
+    }
+    
+    
+    func createLayout() -> UICollectionViewCompositionalLayout {
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+            
+            switch self.datasource.snapshot().sectionIdentifiers[sectionIndex] {
+            case .leaderboard:
+                let leaderboardItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.3)))
+                
+                let verticalTrioSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .fractionalHeight(0.3))
+                let leaderboardVerticalTrio = NSCollectionLayoutGroup.vertical(layoutSize: verticalTrioSize, repeatingSubitem: leaderboardItem, count: 3)
+                leaderboardVerticalTrio.interItemSpacing = .fixed(10)
+                
+                let leaderboardSection = NSCollectionLayoutSection(group: leaderboardVerticalTrio)
+                leaderboardSection.interGroupSpacing = 20
+                leaderboardSection.orthogonalScrollingBehavior = .continuous
+                leaderboardSection.contentInsets = .init(top: 12, leading: 20, bottom: 20, trailing: 20)
+                
+                return leaderboardSection
+                
+            default: return nil
+            }
+        }
+        
+        
+        return layout
     }
     
     
