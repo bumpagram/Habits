@@ -88,6 +88,7 @@ class HomeCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewdidload")
         datasource = createDataSource()
         collectionView.dataSource = datasource
         collectionView.collectionViewLayout = createLayout()
@@ -107,7 +108,8 @@ class HomeCollectionViewController: UICollectionViewController {
             self.updateCollectionview()
             habitRequestTask = nil
         }
-        
+        print("viewdidload end")
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -180,7 +182,7 @@ class HomeCollectionViewController: UICollectionViewController {
         
         // “add the leaderboard section ID and set up a new variable for your dictionary of sections to items. Populate it with the leaderboard section.
         arrayOfSectionIDs.append(.leaderboard)
-        var itemsBySection = [ViewModel.Section.leaderboard: leaderboardItems]
+        let itemsBySection = [ViewModel.Section.leaderboard: leaderboardItems] // в учебнике var
         // and finally update snapshot
         datasource.applySnapshotUsing(sectionIDs: arrayOfSectionIDs, itemsBySection: itemsBySection)
     }
@@ -210,6 +212,7 @@ class HomeCollectionViewController: UICollectionViewController {
             switch itemIdentifier {
             case .leaderboardHabit(name: let name, leadingUserRanking: let leadingUserRanking, secondaryUserRanking: let secondaryUserRanking):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeaderboardHabit", for: indexPath) as! LeaderboardHabitCollectionViewCell
+                print("flag after deque leaderboard cell")  // не выводится 0_о
                 cell.habitNameLabel.text = name
                 cell.leaderLabel.text = leadingUserRanking
                 cell.secondaryLabel.text = secondaryUserRanking
@@ -226,12 +229,12 @@ class HomeCollectionViewController: UICollectionViewController {
     
     func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            
+            print("closure layout")
             switch self.datasource.snapshot().sectionIdentifiers[sectionIndex] {
             case .leaderboard:
                 let leaderboardItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.3)))
-                
-                let verticalTrioSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .fractionalHeight(0.3))
+                print("case leader - closure")
+                let verticalTrioSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .fractionalWidth(0.75))
                 let leaderboardVerticalTrio = NSCollectionLayoutGroup.vertical(layoutSize: verticalTrioSize, repeatingSubitem: leaderboardItem, count: 3)
                 leaderboardVerticalTrio.interItemSpacing = .fixed(10)
                 
