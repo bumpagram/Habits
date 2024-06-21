@@ -39,7 +39,7 @@ class UserDetailViewController: UIViewController, UICollectionViewDelegate {
     }
     
     struct Model {
-        var userStats: UserStatistics?
+        var userStatistics: UserStatistics?
         var leadingStats: UserStatistics?
     }
     
@@ -99,9 +99,9 @@ class UserDetailViewController: UIViewController, UICollectionViewDelegate {
         userStatRequestTask = Task {
             if let askServerUserStats = try? await UserStatisticsRequest(userIDs: [user.id]).send(),
                askServerUserStats.count > 0 {
-                self.model.userStats = askServerUserStats[0]
+                self.model.userStatistics = askServerUserStats[0]
             } else {
-                self.model.userStats = nil
+                self.model.userStatistics = nil
             }
             
             self.updateCollectionView()
@@ -126,7 +126,7 @@ class UserDetailViewController: UIViewController, UICollectionViewDelegate {
     
     func updateCollectionView() {
         // to setup your viewmodel and apply snapshot.  Ведомый метод для updateData().
-        guard let someUserStats = model.userStats, let someLeadStats = model.leadingStats  else {return}
+        guard let someUserStats = model.userStatistics, let someLeadStats = model.leadingStats  else {return}
         
         var itemsBySection = someUserStats.habitCounts.reduce(into: [ViewModel.Section: [ViewModel.Item]]())  { partialResult, someHabitCount in
             let someSection: ViewModel.Section

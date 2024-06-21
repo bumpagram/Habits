@@ -44,8 +44,8 @@ class HomeCollectionViewController: UICollectionViewController {
     struct Model {
         var usersByID = [String: User]()
         var habitsByName = [String: Habit]()
-        var habitStats = [HabitStatistics]()
-        var userStats = [UserStatistics]()
+        var habitStatistics = [HabitStatistics]()
+        var userStatistics = [UserStatistics]()
         
         var currentuser: User {
             return Settings.shared.currentUser
@@ -88,14 +88,19 @@ class HomeCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewdidload")
+        print("viewdidload") // debug
+        //collectionView.register(LeaderboardHabitCollectionViewCell.self, forCellWithReuseIdentifier: "LeaderboardHabit")  // debug
+        //collectionView.register(FollowedUserCollectionViewCell.self, forCellWithReuseIdentifier: "FollowedUser")   // debug
+        
         datasource = createDataSource()
         collectionView.dataSource = datasource
+        print(collectionView.dataSource as Any)  // debug
         collectionView.collectionViewLayout = createLayout()
         
         userRequestTask = Task {
             if let fetchedUsers = try? await UserRequest().send() {
                 self.model.usersByID = fetchedUsers
+                print("userRequestTask success")
             }
             self.updateCollectionview()
             userRequestTask = nil
@@ -104,11 +109,12 @@ class HomeCollectionViewController: UICollectionViewController {
         habitRequestTask = Task {
             if let fetchedHabits = try? await HabitRequest().send() {
                 self.model.habitsByName = fetchedHabits
+                print("habitRequestTask success")
             }
             self.updateCollectionview()
             habitRequestTask = nil
         }
-        print("viewdidload end")
+        print("viewdidload end") // debug
 
     }
     
@@ -132,7 +138,7 @@ class HomeCollectionViewController: UICollectionViewController {
         
         // “You're filtering the habit statistics to eliminate habits that aren't in the user's favorites, sorting them by name, then reducing the resulting array into an array of view model items.”
         
-        let leaderboardItems = model.habitStats.filter { stat in
+        let leaderboardItems = model.habitStatistics.filter { stat in
             model.favoriteHabits.contains { $0.name == stat.habit.name }
         }
             .sorted { $0.habit.name < $1.habit.name }
@@ -193,11 +199,12 @@ class HomeCollectionViewController: UICollectionViewController {
         
         combinedStatRequestTask = Task {
             if let fetchCombinedStat = try? await CombinedStatRequest().send() {
-                self.model.userStats = fetchCombinedStat.userStat
-                self.model.habitStats = fetchCombinedStat.habitStat
+                self.model.userStatistics = fetchCombinedStat.userStatistics
+                self.model.habitStatistics = fetchCombinedStat.habitStatistics
+                print("combinedStatRequestTask success")
             } else {
-                self.model.userStats = []
-                self.model.habitStats = []
+                self.model.userStatistics = []
+                self.model.habitStatistics = []
             }
             self.updateCollectionview()
             combinedStatRequestTask = nil
@@ -212,7 +219,7 @@ class HomeCollectionViewController: UICollectionViewController {
             switch itemIdentifier {
             case .leaderboardHabit(name: let name, leadingUserRanking: let leadingUserRanking, secondaryUserRanking: let secondaryUserRanking):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeaderboardHabit", for: indexPath) as! LeaderboardHabitCollectionViewCell
-                print("flag after deque leaderboard cell")  // не выводится 0_о
+                print("flag after deque leaderboard cell")  // debug - выводится и заходит в свитч
                 cell.habitNameLabel.text = name
                 cell.leaderLabel.text = leadingUserRanking
                 cell.secondaryLabel.text = secondaryUserRanking
@@ -222,7 +229,7 @@ class HomeCollectionViewController: UICollectionViewController {
             }
         }
         
-        
+        print(somedatasource)  // debug
         return somedatasource
     }
     

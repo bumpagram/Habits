@@ -6,6 +6,6 @@ import Foundation
 
 
 struct CombinedStatistics: Codable {
-    let userStat: [UserStatistics]
-    let habitStat: [HabitStatistics]
+    let userStatistics: [UserStatistics]
+    let habitStatistics: [HabitStatistics]
 }
