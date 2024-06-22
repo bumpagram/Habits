@@ -337,7 +337,8 @@ class HomeCollectionViewController: UICollectionViewController {
                 let background = NSCollectionLayoutDecorationItem.background(elementKind: SupplementaryView.leaderboardBackground.viewKind)
                 leaderboardSection.boundarySupplementaryItems = [sectionHeader]
                 leaderboardSection.decorationItems = [background]
-                leaderboardSection.supplementariesFollowContentInsets = false
+                //leaderboardSection.supplementariesFollowContentInsets = false   // iOS 16 deprecated
+                leaderboardSection.supplementaryContentInsetsReference = .none
                 
                 return leaderboardSection
                 
