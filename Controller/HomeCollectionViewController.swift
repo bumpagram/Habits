@@ -107,6 +107,9 @@ class HomeCollectionViewController: UICollectionViewController {
             habitRequestTask = nil
         }
         
+        SupplementaryView.allCases.forEach { $0.nowRegister(this: collectionView)  }  // supplementary view can register themselves.  collectionView = internal property of current Class
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -281,6 +284,35 @@ class HomeCollectionViewController: UICollectionViewController {
             }
         }
         
+        
+        somedatasource.supplementaryViewProvider = .some({ collectionView, elementKind, indexPath in
+            /* для конфига и создания supplementaryViews (header или footer)
+             “Note that you don't handle the .leaderboardBackground case; that's because decoration views provide visual adornments to a section or to the entire collection view but are not otherwise tied to the data provided by the collection view’s data source.
+            */
+            guard let thisKind = SupplementaryView(rawValue: elementKind) else {return nil}
+            let someview = collectionView.dequeueReusableSupplementaryView(ofKind: thisKind.viewKind, withReuseIdentifier: thisKind.reuseIdentifier, for: indexPath)
+            
+            switch thisKind {
+            case .leaderboardSectionHeader:
+                let header = someview as! NamedSectionHeaderView
+                header.nameLabel.text = "Leaderboard"
+                header.nameLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+                header.alignLabelToTop()
+                return header
+                
+            case .followedUsersSectionHeader:
+                let header = someview as! NamedSectionHeaderView
+                header.nameLabel.text = "Following"
+                header.nameLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+                header.alignLabelToYCenter()
+                return header
+                
+            default: return nil
+            }
+            
+        })
+        
+        
         return somedatasource
     }
     
@@ -301,6 +333,12 @@ class HomeCollectionViewController: UICollectionViewController {
                 leaderboardSection.orthogonalScrollingBehavior = .continuous
                 leaderboardSection.contentInsets = .init(top: 12, leading: 20, bottom: 20, trailing: 20)
                 
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(80)), elementKind: SupplementaryView.leaderboardSectionHeader.viewKind, alignment: .top)
+                let background = NSCollectionLayoutDecorationItem.background(elementKind: SupplementaryView.leaderboardBackground.viewKind)
+                leaderboardSection.boundarySupplementaryItems = [sectionHeader]
+                leaderboardSection.decorationItems = [background]
+                leaderboardSection.supplementariesFollowContentInsets = false
+                
                 return leaderboardSection
                 
             case .followedUsers:
@@ -309,6 +347,9 @@ class HomeCollectionViewController: UICollectionViewController {
                 let followGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100)), repeatingSubitem: followItem, count: 1)
                 
                 let followSection = NSCollectionLayoutSection(group: followGroup)
+                
+                let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60)), elementKind: SupplementaryView.followedUsersSectionHeader.viewKind, alignment: .top)
+                followSection.boundarySupplementaryItems = [header]
                 
                 return followSection
             }
@@ -348,6 +389,81 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     
+}
+
+
+
+enum SupplementaryItemType {
+    /*
+     “to distinguish between the two different methods for registering supplementary views. The most common way is registering supplementary views with the collection view, which you're already familiar with. However, you must register decoration views that you create in compositional layouts with the layout itself.
+     */
+    case collectionSuppView
+    case layoutDecorationView
+}
+
+
+protocol SupplementaryItem {
+    /* “provides everything you need to write generic code to register supplementary items”
+     “You'll notice that the ViewClass associated type enables you to register a class whose type you don't know, because you've restricted it to be a subclass of UICollectionReusableView, which is the requirement of register(_:forDecorationViewOfKind:) and register(_:forSupplementaryViewOfKind:).
+     */
     
+    associatedtype ViewClass: UICollectionReusableView
+    var itemType: SupplementaryItemType {get}
+    var reuseIdentifier: String {get}
+    var viewKind: String {get}
+    var viewClass: ViewClass.Type {get}
+}
+
+
+extension SupplementaryItem {
+    // func for registering supplementary items
+    func nowRegister(this: UICollectionView) {
+        switch itemType {
+        case .collectionSuppView:
+            this.register(viewClass.self, forSupplementaryViewOfKind: viewKind, withReuseIdentifier: reuseIdentifier)
+            
+        case .layoutDecorationView:
+            this.collectionViewLayout.register(viewClass.self, forDecorationViewOfKind: viewKind)
+        }
+    }
+}
+
+
+enum SupplementaryView: String, CaseIterable, SupplementaryItem {
     
+    /*
+     “The home screen will include section headers for the leaderboard and followed users as well as a background decoration view for the leaderboard and a background for each group of three leaderboard items. Declare a new enum for all these new views that adopts the new protocol you just created.”
+     CaseIterable - чтобы можно было собрать все case в .allCases массив
+     String = rawValue для исчисляемых свойств
+     SupplementaryItem = соответствие этому протоколу чтобы в замыкании методы и проперти юзать
+     */
+    case leaderboardSectionHeader
+    case leaderboardBackground
+    case followedUsersSectionHeader
+    
+    var reuseIdentifier: String { rawValue }
+    var viewKind: String { rawValue }
+    
+    var viewClass: UICollectionReusableView.Type {
+        switch self {
+        case .leaderboardBackground: return SectionBackgroundView.self
+        default: return NamedSectionHeaderView.self
+        }
+    }
+    
+    var itemType: SupplementaryItemType {
+        switch self {
+        case .leaderboardBackground: return .layoutDecorationView
+        default: return .collectionSuppView
+        }
+    }
+    
+}
+
+
+
+class SectionBackgroundView: UICollectionReusableView {
+    override func didMoveToSuperview() {
+        backgroundColor = .systemGray6
+    }
 }

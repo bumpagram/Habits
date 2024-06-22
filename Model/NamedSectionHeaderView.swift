@@ -15,6 +15,24 @@ class NamedSectionHeaderView: UICollectionReusableView {
         return label
     }()
     
+    // 4 properties to handle 2 vertical constraints
+    var _handleCenterYConstraint: NSLayoutConstraint?
+    var handleCenterYConstraint: NSLayoutConstraint {
+        if _handleCenterYConstraint == nil {
+            _handleCenterYConstraint = nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+        }
+        return _handleCenterYConstraint!
+    }
+    
+    var _handleTopYConstraint: NSLayoutConstraint?
+    var handleTopYConstraint: NSLayoutConstraint {
+        if _handleTopYConstraint == nil {
+            _handleTopYConstraint = nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12)
+        }
+        return _handleTopYConstraint!
+    }
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -28,14 +46,31 @@ class NamedSectionHeaderView: UICollectionReusableView {
     
     
     private func setupView() {
-        backgroundColor = .systemGray5
+        backgroundColor = .systemGray4
         addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+            //nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
          
+        alignLabelToYCenter()
     }
+    
+    
+    func alignLabelToTop() {
+        // to toggle vertical constraints
+        handleTopYConstraint.isActive = true
+        handleCenterYConstraint.isActive = false
+    }
+    
+    func alignLabelToYCenter() {
+        // to toggle vertical constraints
+        handleTopYConstraint.isActive = false
+        handleCenterYConstraint.isActive = true
+    }
+    
+   
+    
 }
