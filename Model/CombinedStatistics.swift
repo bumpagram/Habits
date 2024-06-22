@@ -6,6 +6,6 @@ import Foundation
 
 
 struct CombinedStatistics: Codable {
-    let userStatistics: [UserStatistics]
+    let userStatistics: [UserStatistics]   // учавствует в декодировании JSON, поэтому имена длинные
     let habitStatistics: [HabitStatistics]
 }
