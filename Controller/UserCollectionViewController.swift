@@ -108,6 +108,11 @@ class UserCollectionViewController: UICollectionViewController {
             content.directionalLayoutMargins = .init(top: 11, leading: 8, bottom: 11, trailing: 8)
             content.textProperties.alignment = .center
             cell.contentConfiguration = content
+
+            var backgroundConfig = UIBackgroundConfiguration.clear() // creates empty config with transparent background
+            backgroundConfig.backgroundColor = itemIdentifier.user.color?.uiColor ?? UIColor.systemGray4
+            cell.backgroundConfiguration = backgroundConfig
+            
             return cell
         }
         

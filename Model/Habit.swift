@@ -1,10 +1,11 @@
 //  Habit.swift
 //  Habits
 //  Created by bumpagram on 10/6/24.
+// для декодирования JSON. чтобы распаковать дополнительные вложенные {}, - создаем объекты в объектах
 
 import Foundation
 
-// для декодирования JSON. чтобы распаковать дополнительные вложенные {}, - создаем объекты в объектах
+
 
 struct Habit: Codable, Comparable {
     let category: Category
@@ -18,23 +19,12 @@ struct Habit: Codable, Comparable {
 }
 
 
+
 struct Category: Codable {
     let color: Color
     let name: String
 }
 
-
-struct Color: Codable {
-    let brightness: Double  // "b"
-    let hue: Double  // "h"
-    let saturation: Double  // "s"
-    
-    enum CodingKeys: String, CodingKey {
-        case hue = "h"
-        case saturation = "s"
-        case brightness = "b"
-    }
-}
 
 
 extension Habit: Hashable {
@@ -46,6 +36,8 @@ extension Habit: Hashable {
         hasher.combine(name)  // хз что это и зачем, просто переписал
     }
 }
+
+
 
 extension Category: Hashable {
     static func == (lhs: Category, rhs: Category) -> Bool {

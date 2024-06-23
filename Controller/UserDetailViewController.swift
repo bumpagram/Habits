@@ -75,6 +75,14 @@ class UserDetailViewController: UIViewController, UICollectionViewDelegate {
         }
         
         collectionview.delegate = self
+        
+        view.backgroundColor = user.color?.uiColor ?? .white  // корневая view,если не сделать доп настройки то закрасит вообще всё что надо и не надо, втч navigationBar, tabBar, system top
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.backgroundColor = .quaternarySystemFill
+        tabBarController?.tabBar.scrollEdgeAppearance = tabBarAppearance
+        let navBarApperance = UINavigationBarAppearance()
+        navBarApperance.backgroundColor = .quaternarySystemFill
+        navigationItem.scrollEdgeAppearance = navBarApperance
     }
     
     
