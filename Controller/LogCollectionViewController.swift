@@ -4,14 +4,37 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
 
 class LogCollectionViewController: HabitCollectionViewController {
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         // createLayout вызывается в ViewDidLoad, но в HabitCollectionViewController, тк унаследовались от него
+        
+    }
+    
+    
+    override func configThisCell(_ cell: UICollectionViewListCell, withthis input: HabitCollectionViewController.ViewModel.Item) {
+        // вызывается в CreateDatasource() HabitCollection VC, унаследован. но чуть поправим под этот экран.
+        
+        var content = UIListContentConfiguration.cell()  // creates default config you use to style a cell in a list
+        content.text = input.name
+        content.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 11, leading: 8, bottom: 11, trailing: 8)
+        content.textProperties.alignment = .center
+        cell.contentConfiguration = content
+        
+        var backgroundConfig = UIBackgroundConfiguration.clear()
+        
+        if Settings.shared.favoriteHabits.contains(input) {
+            backgroundConfig.backgroundColor = favoriteHabitColor
+        } else {
+            backgroundConfig.backgroundColor = .systemGray6
+        }
+        
+        backgroundConfig.cornerRadius = 0
+        cell.backgroundConfiguration = backgroundConfig
     }
     
     
@@ -73,5 +96,6 @@ class LogCollectionViewController: HabitCollectionViewController {
          “Notice that a reference to the task is not saved in this case, as there is no reason to try to cancel it. All requests to send the data to the server should continue to be tried until it succeeds or times out. (Of course, in a real-world example you would want to handle errors, so the user has the opportunity to submit their request again.) A new Task will be created each time a habit is logged.
          */
     }
-
+    
+    
 }

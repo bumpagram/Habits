@@ -28,6 +28,13 @@ class UserDetailViewController: UIViewController, UICollectionViewDelegate {
             case leading
             case category(_ some: Category)
             
+            var sectionColor: UIColor {
+                switch self{
+                case .leading: return .systemGray4
+                case .category(let somecategory): return somecategory.color.uiColor
+                }
+            }
+            
             static func < (lhs: UserDetailViewController.ViewModel.Section, rhs: UserDetailViewController.ViewModel.Section) -> Bool {
                 switch (lhs, rhs) {
                 case (.leading, .category), (.leading, .leading): return true
@@ -75,8 +82,8 @@ class UserDetailViewController: UIViewController, UICollectionViewDelegate {
         }
         
         collectionview.delegate = self
-        
-        view.backgroundColor = user.color?.uiColor ?? .white  // корневая view,если не сделать доп настройки то закрасит вообще всё что надо и не надо, втч navigationBar, tabBar, system top
+        // корневая view,если не сделать доп настройки то закрасит вообще всё что надо и не надо, втч navigationBar, tabBar, system top
+        view.backgroundColor = user.color?.uiColor ?? .white
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.backgroundColor = .quaternarySystemFill
         tabBarController?.tabBar.scrollEdgeAppearance = tabBarAppearance
@@ -176,6 +183,8 @@ class UserDetailViewController: UIViewController, UICollectionViewDelegate {
             case .leading: header.nameLabel.text = "Leading"
             case .category(let somecategory): header.nameLabel.text = somecategory.name
             }
+            
+            header.backgroundColor = section.sectionColor
             return header
         })
         

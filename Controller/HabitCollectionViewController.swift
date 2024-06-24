@@ -4,7 +4,8 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+let favoriteHabitColor = UIColor(hue: 0.15, saturation: 1, brightness: 0.9, alpha: 1)  // вынес на уровень файла бывшее ViewModel.Section.sectionColor.favorites return init. Также вызывается в Log.
+
 
 class HabitCollectionViewController: UICollectionViewController {
     
@@ -21,6 +22,13 @@ class HabitCollectionViewController: UICollectionViewController {
         enum Section: Hashable, Comparable {
             case favorites
             case category(_ category: Category)
+            
+            var sectionColor: UIColor { // category colors for sections
+                switch self {
+                case .favorites: return favoriteHabitColor
+                case .category(let somecategory): return somecategory.color.uiColor
+                }
+            }
             
             static func < (lhs: Section, rhs: Section) -> Bool {
                 switch (lhs, rhs) {
@@ -49,7 +57,7 @@ class HabitCollectionViewController: UICollectionViewController {
     var model = Model()  
     /* “to store the data model after it's fetched from the network. Notice that you don't have a viewModel property. You'll construct a new view model each time you receive an update from the API and use it to create a snapshot, so there's no need for you to maintain your own copy.
      */
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,12 +133,17 @@ class HabitCollectionViewController: UICollectionViewController {
     }
 
         
+    func configThisCell(_ cell: UICollectionViewListCell, withthis input: HabitCollectionViewController.ViewModel.Item) {
+        // извлек в метод вспомогательный код для createDataSource(), Убрал модификатор fileprivate. буду вызывать из HabitCollectionViewController и унаследованный LogCollectionViewController.
+        var content = cell.defaultContentConfiguration()
+        content.text = input.name
+        cell.contentConfiguration = content
+    }
+    
     func createDataSource() -> DataSourceType {
         let somedataSource = DataSourceType(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Habit", for: indexPath) as! UICollectionViewListCell
-            var content = cell.defaultContentConfiguration()
-            content.text = itemIdentifier.name
-            cell.contentConfiguration = content
+            self.configThisCell(cell, withthis: itemIdentifier)
             return cell
         }
         
@@ -138,17 +151,12 @@ class HabitCollectionViewController: UICollectionViewController {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: SectionHeader.kind.identifier, withReuseIdentifier: SectionHeader.reuse.identifier, for: indexPath) as! NamedSectionHeaderView
             let section = somedataSource.snapshot().sectionIdentifiers[indexPath.section]
             
-            
             switch section {
-            case .favorites: 
-                header.nameLabel.text = "Favorites"
-                //header.backgroundColor = .systemBlue // для избренного дополнительно стилизуем заголовок
-                //header.nameLabel.textColor = .white  // вне упражнения самодеятельность. почему-то багуется и красит при скролле случайные заголовки секций помимо избранного
-                
-            case .category(let existCategory): header.nameLabel.text = existCategory.name
+            case .favorites:  header.nameLabel.text = "Favorites"
+            case .category(let existCategory):  header.nameLabel.text = existCategory.name
             }
-             
             
+            header.backgroundColor = section.sectionColor
             return header
         })
         
