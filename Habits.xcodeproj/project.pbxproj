@@ -36,6 +36,12 @@
 		5AAC0C332C131DA7003A111A /* HabitServer.app in Resources */ = {isa = PBXBuildFile; fileRef = 5AAC0C312C131DA7003A111A /* HabitServer.app */; };
 		5AB9438A2C1F2C4B0016568C /* HabitStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB943892C1F2C4B0016568C /* HabitStatistics.swift */; };
 		5AE174962C1F84390041A562 /* UserStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE174952C1F84390041A562 /* UserStatistics.swift */; };
+		5AF20E072C29E0AC00CFD552 /* Final 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AF20E062C29E0AC00CFD552 /* Final 1.png */; };
+		5AF20E092C29E0CC00CFD552 /* Final 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AF20E082C29E0CC00CFD552 /* Final 2.png */; };
+		5AF20E0B2C29E0D300CFD552 /* Final 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AF20E0A2C29E0D300CFD552 /* Final 3.png */; };
+		5AF20E0D2C29E0D800CFD552 /* Final 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AF20E0C2C29E0D800CFD552 /* Final 4.png */; };
+		5AF20E0F2C29E0DD00CFD552 /* Final 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AF20E0E2C29E0DD00CFD552 /* Final 5.png */; };
+		5AF20E112C29E0E200CFD552 /* Final 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AF20E102C29E0E200CFD552 /* Final 6.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +97,12 @@
 		5AAC0C312C131DA7003A111A /* HabitServer.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = HabitServer.app; sourceTree = "<group>"; };
 		5AB943892C1F2C4B0016568C /* HabitStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatistics.swift; sourceTree = "<group>"; };
 		5AE174952C1F84390041A562 /* UserStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatistics.swift; sourceTree = "<group>"; };
+		5AF20E062C29E0AC00CFD552 /* Final 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Final 1.png"; sourceTree = "<group>"; };
+		5AF20E082C29E0CC00CFD552 /* Final 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Final 2.png"; sourceTree = "<group>"; };
+		5AF20E0A2C29E0D300CFD552 /* Final 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Final 3.png"; sourceTree = "<group>"; };
+		5AF20E0C2C29E0D800CFD552 /* Final 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Final 4.png"; sourceTree = "<group>"; };
+		5AF20E0E2C29E0DD00CFD552 /* Final 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Final 5.png"; sourceTree = "<group>"; };
+		5AF20E102C29E0E200CFD552 /* Final 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Final 6.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +183,12 @@
 				5AA1F84A2C125CD0002CAABE /* Habits */,
 				5AA1F8612C125CD1002CAABE /* HabitsTests */,
 				5AA1F86B2C125CD2002CAABE /* HabitsUITests */,
+				5AF20E062C29E0AC00CFD552 /* Final 1.png */,
+				5AF20E082C29E0CC00CFD552 /* Final 2.png */,
+				5AF20E0A2C29E0D300CFD552 /* Final 3.png */,
+				5AF20E0C2C29E0D800CFD552 /* Final 4.png */,
+				5AF20E0E2C29E0DD00CFD552 /* Final 5.png */,
+				5AF20E102C29E0E200CFD552 /* Final 6.png */,
 				5AA1F8492C125CD0002CAABE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -327,8 +345,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AF20E092C29E0CC00CFD552 /* Final 2.png in Resources */,
 				5AA1F8552C125CD1002CAABE /* Assets.xcassets in Resources */,
+				5AF20E112C29E0E200CFD552 /* Final 6.png in Resources */,
+				5AF20E0B2C29E0D300CFD552 /* Final 3.png in Resources */,
+				5AF20E0F2C29E0DD00CFD552 /* Final 5.png in Resources */,
 				5AAC0C332C131DA7003A111A /* HabitServer.app in Resources */,
+				5AF20E0D2C29E0D800CFD552 /* Final 4.png in Resources */,
+				5AF20E072C29E0AC00CFD552 /* Final 1.png in Resources */,
 				5AA1F8582C125CD1002CAABE /* Base in Resources */,
 				5AA1F8532C125CD0002CAABE /* Base in Resources */,
 			);
