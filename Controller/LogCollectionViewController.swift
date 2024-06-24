@@ -17,24 +17,43 @@ class LogCollectionViewController: HabitCollectionViewController {
     
     
     override func configThisCell(_ cell: UICollectionViewListCell, withthis input: HabitCollectionViewController.ViewModel.Item) {
-        // вызывается в CreateDatasource() HabitCollection VC, унаследован. но чуть поправим под этот экран.
+        /* вызывается в CreateDatasource() HabitCollection VC, унаследован. но чуть поправим под этот экран.
+         “To make the Log Habit cells feel more like buttons, you can update the state of the cells when they are selected. UICollectionViewListCells can modify their configuration based on the state they are in. One way to do this is by providing a closure to the cell's configureUpdateHandler property. The cell will call this handler every time there is a change in state.”
+         */
         
-        var content = UIListContentConfiguration.cell()  // creates default config you use to style a cell in a list
-        content.text = input.name
-        content.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 11, leading: 8, bottom: 11, trailing: 8)
-        content.textProperties.alignment = .center
-        cell.contentConfiguration = content
+        cell.configurationUpdateHandler = .some({ somecell, state in
+            // “You simply generate the complete configuration each time, and the system will take care of optimizing the display of the new state”
+            
+            var content = UIListContentConfiguration.cell()  // creates default config you use to style a cell in a list
+            content.text = input.name
+            content.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 11, leading: 8, bottom: 11, trailing: 8)
+            content.textProperties.alignment = .center
+            somecell.contentConfiguration = content
+            
+            var backgroundConfig = UIBackgroundConfiguration.clear()
+            
+            if Settings.shared.favoriteHabits.contains(input) {
+                backgroundConfig.backgroundColor = favoriteHabitColor
+            } else {
+                backgroundConfig.backgroundColor = .systemGray6
+            }
+            
+            if state.isHighlighted {
+                // reduce alpha of tint color to 30$ whan highlighted
+                backgroundConfig.backgroundColorTransformer = .init({ UIColor in
+                    UIColor.withAlphaComponent(0.3)
+                })
+            }
+            
+            backgroundConfig.cornerRadius = 0
+            somecell.backgroundConfiguration = backgroundConfig
+        })
         
-        var backgroundConfig = UIBackgroundConfiguration.clear()
-        
-        if Settings.shared.favoriteHabits.contains(input) {
-            backgroundConfig.backgroundColor = favoriteHabitColor
-        } else {
-            backgroundConfig.backgroundColor = .systemGray6
-        }
-        
-        backgroundConfig.cornerRadius = 0
-        cell.backgroundConfiguration = backgroundConfig
+        cell.layer.shadowRadius = 3
+        cell.layer.shadowColor = UIColor.systemGray3.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 2)
+        cell.layer.shadowOpacity = 1
+        cell.layer.masksToBounds = false
     }
     
     

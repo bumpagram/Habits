@@ -14,8 +14,8 @@
             filePath = "Controller/HomeCollectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "createLayout()"
             landmarkType = "7">
          </BreakpointContent>

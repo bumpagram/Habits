@@ -110,6 +110,7 @@ class UserCollectionViewController: UICollectionViewController {
 
             var backgroundConfig = UIBackgroundConfiguration.clear() // creates empty config with transparent background
             backgroundConfig.backgroundColor = itemIdentifier.user.color?.uiColor ?? UIColor.systemGray4
+            backgroundConfig.cornerRadius = 8
             cell.backgroundConfiguration = backgroundConfig
             
             return cell
